@@ -4,7 +4,7 @@ from urllib.request import urlopen
 
 def main():
     # 配置从聚合数据处得到的APPKey
-    appkey = "7eacbad9cfcd8e18c95d29ce724929ed"
+    appkey = "********************************"
 
     # 1.作文基本信息列表
     request1(appkey, id1=0, id2=0, id3=0, id4=0, m="GET")#request1查询作文基本信息
