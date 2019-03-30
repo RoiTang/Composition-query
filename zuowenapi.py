@@ -33,13 +33,16 @@ def request1(appkey, id1, id2, id3, id4, m="GET"):
     if res:
         error_code = res["error_code"]
         if error_code == 0:
-            # 成功请求
-            print(res["result"])#请求成功，返回作文基本信息
+            #请求成功，返回作文基本信息
+            print(res["result"])
             return res['result']
         else:
+            #请求失败，返回0
             print("%s:%s" % (res["error_code"], res["reason"]))
+            return 0 
     else:
         print("request api error")
+        return 0 #API错误，返回0
 
 
 # 作文内容接口
@@ -61,14 +64,16 @@ def request2(appkey, idd, m="GET"):
     if res:
         error_code = res["error_code"]
         if error_code == 0:
-            # 成功请求
+            # 成功请求,返回查询结果
             print(res["result"])
             return res['result']
         else:
+            #请求失败,返回0
             print("%s:%s" % (res["error_code"], res["reason"]))
-            return res['reason']
+            return 0
     else:
         print("request api error")
+        return 0 #API错误，返回0
 
 if __name__ == '__main__':
     main()
