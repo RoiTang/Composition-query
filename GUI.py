@@ -1,5 +1,5 @@
 import sys
-from zuowenapi import request1, request2#从API文档中导入函数
+from zuowenapi import request1, request2#从API文件中导入函数
 #导入相关的类
 from PyQt5.QtWidgets import QApplication, QGridLayout, QWidget, QDesktopWidget, QPushButton, QMessageBox, QLineEdit, QColorDialog, QFontDialog, QTextEdit, QDialog, QLabel, QComboBox
 from PyQt5.QtPrintSupport import QPageSetupDialog, QPrintDialog, QPrinter
@@ -203,7 +203,11 @@ class Example(QWidget):
     def ask_composition(self):
         id = int(self.id_request.text())#从id输入文本框中获取输入的id值
         self.result1 = request2(self.appkey, id)#调用request2函数查询作文内容
-        self.composition_body.setText(self.result1['content'])#将作文内容显示在composition_body文本框中
+        #将作文内容显示在composition_body文本框中
+        if self.result1 == 0:
+            self.composition_body.setText("无此作文id!请换一个id试试!")
+        else:
+            self.composition_body.setText(self.result1['content'])
 
     #定义accecc_id函数获取作文id
     def access_id(self):
@@ -220,13 +224,16 @@ class Example(QWidget):
         #调用request1函数查询作文id
         self.result2 = request1(self.appkey, gradeid, themeid, rankid, word_numberid)
         #将所找到的作文题目和id显示在id_providing文本框中
-        n = len(self.result2['list'])
-        string ='题目:'+self.result2['list'][0]['name'] + ' id是:' + str(self.result2['list'][0]['id'])+'\n'
-        i = 1
-        while i < n:
-            string = string + '题目:'+self.result2['list'][i]['name'] + ' id是:' + str(self.result2['list'][i]['id'])+'\n'
-            i+=1
-        self.id_providing.setText(string)
+        if self.result2 == 0:
+            self.id_providing.setText("未查询到相关结果!\n再换一种试试呀!")
+        else:
+            n = len(self.result2['list'])
+            string ='题目:'+self.result2['list'][0]['name'] + ' id是:' + str(self.result2['list'][0]['id'])+'\n'
+            i = 1
+            while i < n:
+                string = string + '题目:'+self.result2['list'][i]['name'] + ' id是:' + str(self.result2['list'][i]['id'])+'\n'
+                i+=1
+            self.id_providing.setText(string)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
