@@ -12,7 +12,7 @@ class Example(QWidget):
         super().__init__()
         self.printer = QPrinter()
         self.initUI()
-        self.appkey = "7eacbad9cfcd8e18c95d29ce724929ed"#从聚合数据处获得的APPKey
+        self.appkey = "*****************************"#从聚合数据处获得的APPKey
         self.result1 = {'comment':'','content':'','school':'','teacher':'','id':''}#储存精确查询结果
         self.result2 = {'totalCount': '', 'page': '', 'size': '', 'list': []}#储存查询结果
         #加入各个选项卡内容
